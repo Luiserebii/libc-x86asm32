@@ -12,7 +12,7 @@ string:
 	as $(ASFLAGS) src/string.s -o build/string.o 
 
 link: 
-	ld $(LDFLAGS) build/string.o -o $(NAME).so
+	ld $(LDFLAGS) build/string.o -o lib$(NAME).so
 
 clean:
-	rm -rf build/* $(NAME).so 
+	rm -rf build/* lib$(NAME).so 
