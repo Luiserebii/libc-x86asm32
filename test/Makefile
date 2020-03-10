@@ -1,22 +1,18 @@
 MAIN_NAME=x86asmstl
-CFLAGS=-g3 -Wall -Wextra -ffreestanding -m32
+ASFLAGS=-g --32
 LDFLAGS=-L .. -dynamic-linker /lib/ld-linux.so.2 -l$(MAIN_NAME) -m elf_i386
-TEST_OBJ=test.o
 
-main: setup build_main test link
-
+main: setup test link
 
 setup:
 	mkdir -p build
-
-build_main:
 	cd .. && make
 
 test:
-	$(CC) $(CFLAGS) ./src/* ./lib/*.c -o test.o
+	as $(ASFLAGS) ./src/test.s -o ./build/test.o
 
 link: 
-	ld $(LDFLAGS) $(TEST_OBJ)
+	ld $(LDFLAGS) ./build/test.o
 
-out: 
-	tail -n +1 tmp/*
+clean:
+	rm -rf build/* && rm a.out
