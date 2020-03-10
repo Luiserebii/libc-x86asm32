@@ -1,7 +1,9 @@
-MAIN_NAME=x86asmstl
+MAIN_NAME=cx86asm32
 ASFLAGS=-g --32
 LDFLAGS=-m elf_i386
 MAIN_BUILD_FILES=../build/*.o
+
+LDDYNFLAGS=-L .. -dynamic-linker /lib/ld-linux.so.2 -l$(MAIN_NAME)
 
 main: setup test link
 
@@ -14,6 +16,9 @@ test:
 
 link: 
 	ld $(LDFLAGS) $(MAIN_BUILD_FILES) ./build/test.o
+
+dyn-link:
+	ld $(LDFLAGS) $(LDDYNFLAGS) ./build/test.o
 
 clean:
 	rm -rf build/* && rm a.out

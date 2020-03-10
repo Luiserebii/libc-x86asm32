@@ -1,5 +1,5 @@
 *.swo
 *.swp
-./a.out
+a.out
 *.o
 *.so

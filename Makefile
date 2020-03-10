@@ -1,4 +1,4 @@
-NAME=x86asmstl
+NAME=cx86asm32
 ASFLAGS=-g --32
 LDFLAGS=-shared -m elf_i386
 
