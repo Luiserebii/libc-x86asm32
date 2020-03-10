@@ -8,7 +8,7 @@
 # Expects a char* and returns the length of the string.
 # It is assumed that the string is null-terminated.
 #
-# .globl strlen
+.globl strlen
 .type strlen, @function
 strlen:
 	pushl %ebp
