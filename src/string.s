@@ -27,6 +27,8 @@ strlen_while_char:
 	# Increment %eax and char*
 	incl %eax
 	addl $4, %ebx
+	
+	jmp strlen_while_char
 
 strlen_while_char_end:	
 	
