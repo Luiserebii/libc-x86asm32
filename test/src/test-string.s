@@ -2,7 +2,7 @@
 t_strlen:
 	.ascii "strlen() returns correct length\0"
 str_1:
-	.ascii  "apple\0"
+	.ascii "apple\0"
 str_2:
 	.ascii "banana\0"
 str_3:
@@ -18,7 +18,7 @@ _start:
 	pushl $t_strlen
 	pushl $5
 	pushl %eax
-	call test_assert_equal
+	call test_assert_equal_uint
 
 	pushl $str_2
 	call strlen
@@ -26,7 +26,7 @@ _start:
 	pushl $t_strlen
 	pushl $6
 	pushl %eax
-	call test_assert_equal
+	call test_assert_equal_uint
 	
 	pushl $str_3
 	call strlen
@@ -34,7 +34,7 @@ _start:
 	pushl $t_strlen
 	pushl $4
 	pushl %eax
-	call test_assert_equal
+	call test_assert_equal_uint
 
 	call test_end
 	movl %eax, %ebx
