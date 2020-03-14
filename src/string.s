@@ -35,3 +35,69 @@ strlen_while_char_end:
 	movl %ebp, %esp
 	popl %ebp
 	ret
+
+#
+# void strcat(char* dest, const char* src)
+#
+.globl strcat
+.type strcat, @function
+strcat:
+	pushl %ebp
+	movl %esp, %ebp
+
+	# Load dest and src into registers
+	movl 8(%ebp), %eax
+	movl 12(%ebp), %ecx
+	
+	# Roll dest up to the null terminator (\0)
+	# while(*dest) { ++dest; }
+strcat_while_char_src:
+	cmpb $0, (%eax)
+	je strcat_while_char_src_end
+
+	incl %eax
+	jmp strcat_while_char_src
+
+strcat_while_char_src_end:
+
+	# while(*dest++ = *src++)
+	#    ;
+
+strcat_while_set:
+	movb (%ecx), %dl
+	movb %dl, (%eax)
+	incl %eax
+	incl %ecx
+
+	cmpb $0, %dl
+	jne strcat_while_set
+
+	popl %ebp
+	ret
+#
+# void strcpy(char* dest, const char* src)
+#
+.globl strcpy
+.type strcpy, @function
+strcpy:
+	pushl %ebp
+	movl %esp, %ebp
+
+	# while(*dest++ = *src++)
+	#    ;
+
+	# Load dest and src into registers
+	movl 8(%ebp), %eax
+	movl 12(%ebp), %ecx
+
+strcpy_while_set:
+	movb (%ecx), %dl
+	movb %dl, (%eax)
+	incl %eax
+	incl %edx
+
+	cmpb $0, %dl
+	jne strcpy_while_set
+
+	popl %ebp
+	ret
