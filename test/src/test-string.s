@@ -14,6 +14,18 @@ str_4:
 .globl _start
 
 _start:
+	call test_strlen
+
+	call test_end
+	movl %eax, %ebx
+	movl $1, %eax
+	int $0x80
+
+.type test_strlen, @function
+test_strlen:
+	pushl %ebp
+	movl %esp, %ebp
+
 	pushl $str_1
 	call strlen
 
@@ -47,8 +59,6 @@ _start:
 
 	call test_assert_equal_uint
 
-	call test_end
-	movl %eax, %ebx
-	movl $1, %eax
-	int $0x80
-
+	movl %ebp, %esp
+	popl %ebp
+	ret
