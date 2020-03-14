@@ -7,6 +7,8 @@ str_2:
 	.ascii "banana\0"
 str_3:
 	.ascii "meme\0"
+str_4:
+	.ascii "\0"
 
 .section .text
 .globl _start
@@ -34,6 +36,15 @@ _start:
 	pushl $t_strlen
 	pushl $4
 	pushl %eax
+	call test_assert_equal_uint
+
+	pushl $str_4
+	call strlen
+
+	pushl $t_strlen
+	pushl $0
+	pushl %eax
+
 	call test_assert_equal_uint
 
 	call test_end

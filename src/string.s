@@ -21,12 +21,12 @@ strlen:
 	movl $0, %eax
 	
 strlen_while_char:
-	cmpl $0, (%ebx)
+	cmpb $0, (%ebx)
 	je strlen_while_char_end
 	
 	# Increment %eax and char*
 	incl %eax
-	addl $4, %ebx
+	incl %ebx
 	
 	jmp strlen_while_char
 
